@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="basic algoritms" verbose="1" >
+    <listeners>
+        <listener class-name="javacup100.ngreport4j.customs.ReporterImpl"></listener>
+        <listener class-name="javacup100.ngreport4j.customs.TestListenerImpl"></listener>
+        <listener class-name="javacup100.ngreport4j.customs.SuiteListenerImpl"></listener>
+
+    </listeners>
+    <test name="Sorting and string operation" >
+        <classes>
+            <class name="ItemTest" />
+        </classes>
+    </test>
+    <test name="Sorting with data provider">
+        <classes>
+            <class name="sortTest"/>
+            <class name="demo.Regression"></class>
+            <class name="demo.Smoke"></class>
+        </classes>
+    </test>
+</suite>

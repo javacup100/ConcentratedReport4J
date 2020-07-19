@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Hello Velocity</title>
+    <script src="js/vue.min.js"></script>
+    <script src="js/element-ui/lib/index.js"></script>
+    <link rel="stylesheet" href=="js/element-ui/lib/theme-chalk/index.css"/>
+    <style>
+        table, table tr th, table tr td {
+            border: 1px solid #0094ff;
+        }
+        table thead td{
+            font-family: "Arial";
+            font-size:100%;
+            color:black;
+            font-weight:bold;
+        }
+        table.success tbody tr td{
+            color:green;
+        }
+        table {
+            width: 80%;
+            min-height: 25px;
+            line-height: 25px;
+            text-align: center;
+            border-collapse: collapse;
+            margin-left: 50px;
+        }
+        div{
+            margin-left: 20px;
+        }
+    </style>
+
+</head>
+<body>
+    #foreach ($suite in $suiteList)
+    <h2>$suite.getSuiteName()</h2>
+    <div>
+        <table>
+            <thead>
+            <td width="80%">Total Methods</td>
+            <td width="10%">Succeeded</td>
+            <td width="10%">Failed</td>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>$suite.getTotalNumber()</td>
+                    <td>$suite.getPassedNumber()</td>
+                    <td>$suite.getFailedNumber()</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card">
+        <div class="card-header"><h2>Overall status of $suite.getSuiteName()</h2></div>
+        <div id="suiteBox" style="width: 600px;height:400px;" class="card-body"></div>
+        <script type="text/javascript">
+            var myChart = echarts.init(document.getElementById('suiteBox'));
+            myChart.setOption({
+                title:{
+                    text:'$suite.getSuiteName()'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                series : [
+                    {
+                        name:'cases of $suite.getSuiteName()',
+                        type: 'pie',    // 设置图表类型为饼图
+                        radius: '55%',  // 饼图的半径，外半径为可视区尺寸（容器高宽中较小一项）的 55% 长度。
+                        data:[          // 数据数组，name 为数据项名称，value 为数据项值
+                            {value:$suite.getPassedNumber(), name:'passed', itemStyle: {color:'#1c7430'}},
+                            {value:$suite.getFailedNumber(), name:'failed',itemStyle: {color:'#a71d2a'}},
+                            {value:$suite.getSkippedNumber(), name:'skipped',itemStyle: {color:'#856404'}}
+                        ]
+                    }
+                ]
+            })
+        </script>
+    </div>
+        #foreach($testRun in $suite.getTestRunResults())
+        <div><h3>$testRun.getName()</h3><span>(total:$testRun.getTotalNumber()/passed:$testRun.getPassedNumber())</span></div>
+            <div>
+                <table class="success">
+                    <thead>
+                    <td width="30%">TestCase</td>
+                    <td width="10%">Status</td>
+                    <td width="20%">Start</td>
+                    <td width="20%">End</td>
+                    <td width="10%">Duration</td>
+                    </thead>
+                    <tbody>
+                        #foreach($test in $testRun.getPassedTests())
+                        <tr>
+                            <td align="left">$test.getName()</td>
+                            <td>$test.getStatus()</td>
+                            <td>$test.getStarttimeString()</td>
+                            <td>$test.getEndtimeString()</td>
+                            <td>$test.getDuration()</td>
+                        </tr>
+                        #end
+                    </tbody>
+                </table>
+            </div>
+        #end
+    #end
+</body>
+</html>

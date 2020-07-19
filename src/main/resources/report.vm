@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Test Report</title>
+    <script src="js/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+    <script src="js/bootstrap-4.5.0-dist/js/bootstrap.min.js"></script>
+    <script src="js/echarts/echarts.min.js"></script>
+    <link rel="stylesheet" href="js/bootstrap-4.5.0-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.com/libraries/Chart.js"></script>
+
+    <style>
+        p{
+            color: #856404;
+        }
+        #main{
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        body{
+            background-color: #b3b7bb;
+        }
+        .table-responsive{
+            background-color: #fff
+        }
+        .box{
+            display: flex;
+        }
+       。table-responsive >>> .card-title {
+            margin-bottom: .75rem;
+            margin-top: .75rem;
+        }
+    </style>
+
+</head>
+<body class="">
+    <div class="box">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+    </div>
+
+
+
+<div class="container-fluid" id="main">
+    <h2>Overall Statistics</h2>
+    <div class="row" style="height: 300px">
+        <div class="col-md-4" id="sum">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Total</th>
+                    <th>Passed</th>
+                    <th>Failed</th>
+                    <th>Skipped</th>
+                    <th>Duration</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>$allSuites.getTotalNumber()</td>
+                    <td>$allSuites.getPassedNumber()</td>
+                    <td>$allSuites.getFailedNumber()</td>
+                    <td>$allSuites.getSkippedNumber()</td>
+                    <td>$allSuites.getDurationString()</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="col-md-4" id="sumPie" ></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        ## var myChart = echarts.init(document.getElementById('sumPie'));
+        ##
+        ## // 绘制图表
+        ## myChart.setOption({
+        ##     series : [
+        ##         {
+        ##             name: 'overview',
+        ##             type: 'pie',
+        ##             //直径占整个div高度的多少
+        ##             radius: '100%',
+        ##             data:[
+        ##                 {value:$allSuites.getPassedNumber()/$allSuites.getTotalNumber(), name:'passed'},
+        ##                 {value:$allSuites.getFailedNumber()/$allSuites.getTotalNumber(), name:'failed'},
+        ##                 {value:$allSuites.getSkippedNumber()/$allSuites.getTotalNumber(), name:'skipped'}
+        ##                 ]
+        ##         }
+        ##     ],
+        ##     itemStyle: {
+        ##         normal: {
+        ##             // 设置扇形的颜色，不知道为什么没效果
+        ##             //color: '#c23531',
+        ##             // 阴影的大小
+        ##             shadowBlur: 200,
+        ##             // 阴影水平方向上的偏移
+        ##             shadowOffsetX: 0,
+        ##             // 阴影垂直方向上的偏移
+        ##             shadowOffsetY: 0,
+        ##             // 阴影颜色
+        ##             shadowColor: 'rgba(0, 0, 0, 0.5)'
+        ##         }
+        ##     },
+        ##     backgroundColor: '#b3b7bb',
+        ##     textStyle: {
+        ##         color: 'rgba(255, 255, 255, 0.3)'
+        ##     },
+        ##     lineStyle: {
+        ##         color: 'rgba(255, 255, 255, 0.3)'
+        ##     }
+        ## })
+        var myChart = echarts.init(document.getElementById('sumPie'));
+        var option = {
+            title: {
+                text: 'Statistics by suite',
+                subtext: ''
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: {
+                data: ['passed', 'failed','skipped']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'value',
+                boundaryGap: [0, 0.01]
+            },
+            yAxis: {
+                type: 'category',
+
+                data: [
+                    #foreach ($suite in $suiteList)
+                            '$suite.getSuiteName()',
+                    #end
+                    ]
+            },
+            series: [
+                {
+                    name: 'pass',
+                    type: 'bar',
+                    data: [
+                        #foreach ($suite in $suiteList)
+                                $suite.getPassedNumber(),
+                        #end
+                        ]
+                },
+                {
+                    name: 'fail',
+                    type: 'bar',
+                    data: [
+                        #foreach ($suite in $suiteList)
+                                $suite.getFailedNumber(),
+                        #end
+                    ]
+                },
+                {
+                    name: 'skipp',
+                    type: 'bar',
+                    data: [
+                        #foreach ($suite in $suiteList)
+                                $suite.getSkippedNumber(),
+                        #end
+                    ]
+                }
+            ]
+        };
+        myChart.setOption(option);
+    </script>
+
+    <div class="table-responsive">
+        <h2 class="card-title">Executed cases</h2>
+        <table class="table  table-hover" id="caseTable">
+            <thead class= "thead-light">
+            <tr>
+                <th>Suite</th>
+                <th>TestRun</th>
+                <th>Class</th>
+                <th>Groups</th>
+                <th>CaseName</th>
+                <th width="10%">Duration</th>
+                <th class="filter">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+                #foreach ($suite in $suiteList)
+                    #foreach($testRun in $suite.getTestRunResults())
+                        #foreach($test in $testRun.getAllTests())
+                        <tr>
+                            <td align="left">$suite.getSuiteName()</td>
+                            <td>$testRun.getName()</td>
+                            <td align="left">$test.getClassName()</td>
+                            <td align="left">$test.getGroups()</td>
+                            <td align="left">$test.getName()</td>
+                            <td>$test.getDuration()</td>
+                            #if($test.getStatus()=='SUCCESS')
+                                <td><span class="badge badge-success">$test.getStatus()</span></td>
+                            #else
+                                <td><span class="badge badge-danger">$test.getStatus()</span></td>
+                            #end
+                        </tr>
+                        #end
+                    #end
+                #end
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+<script>
+    // Use the plugin once the DOM has been loaded.
+    // $(function () {
+    //     // Apply the plugin
+    //     $('#caseTable').excelTableFilter();
+    // });
+    $(document).ready( function () {
+        $('#caseTable').DataTable();
+    } );
+</script>
+</html>
