@@ -8,14 +8,7 @@
     </listeners>
     <test name="Sorting and string operation" >
         <classes>
-            <class name="ItemTest" />
-        </classes>
-    </test>
-    <test name="Sorting with data provider">
-        <classes>
-            <class name="sortTest"/>
-            <class name="demo.Regression"></class>
-            <class name="demo.Smoke"></class>
+            <class name="TestFactory" />
         </classes>
     </test>
 </suite>
