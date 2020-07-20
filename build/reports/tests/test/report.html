@@ -9,73 +9,85 @@
     <script src="js/echarts/echarts.min.js"></script>
     <link rel="stylesheet" href="js/bootstrap-4.5.0-dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdnjs.com/libraries/Chart.js"></script>
-
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+    <script>
+        function random() {
+            var x = 10000;
+            var y = 1000;
+            var rand = parseInt(Math.random() * (x - y + 1) + y);
+            return rand;
+        }
+    </script>
     <style>
-        p{
-            color: #856404;
-        }
-        #main{
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-        body{
-            background-color: #b3b7bb;
-        }
-        .table-responsive{
-            background-color: #fff
 
+        body {
+            background-color: #fff;
         }
-        .box{
+
+        .box {
             display: flex;
+            flex-wrap: nowrap;
+            margin:30px 30px 10px 30px;
         }
 
+        .list {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 49.9%;
+            height: 400px;
+            border: solid 1px #ddd;
+        }
+		.casediv {
+            display: block;
+            margin:30px 30px 10px 30px;
+            width: 90%;
+            height: auto;
+            border: solid 1px #ddd;
+        }
+
+        /*.show {*/
+        /*    display: block;*/
+        /*}*/
+
+        /*.dsn {*/
+        /*    display: none;*/
+        /*}*/
+        span{
+            font-weight: bold;
+        }
+		.themed-grid-col {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: rgba(86, 61, 124, .15);
+  border: 1px solid rgba(86, 61, 124, .2);
+}
+
+.themed-container {
+  padding: 15px;
+  margin-bottom: 30px;
+  background-color: rgba(0, 123, 255, .15);
+  border: 1px solid rgba(0, 123, 255, .2);
+}
     </style>
 
 </head>
-<body class="">
-    <div class="box">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>
-
-
-
-<div class="container-fluid" id="main">
-    <h2>Overall Statistics</h2>
-    <div class="row" style="height: 300px">
-        <div class="col-md-4" id="sum">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Total</th>
-                    <th>Passed</th>
-                    <th>Failed</th>
-                    <th>Skipped</th>
-                    <th>Duration</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>31</td>
-                    <td>30</td>
-                    <td>1</td>
-                    <td>0</td>
-                    <td>0 h 0 m 0.14 s</td>
-                </tr>
-                </tbody>
-            </table>
-
-        </div>
-        <div class="col-md-4" id="sumPie" ></div>
-        </div>
-    </div>
-    <script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
-                                                                                                                                                                                                                                                                                                                                var myChart = echarts.init(document.getElementById('sumPie'));
+<body>
+<h2>Summary</h2>
+<div class="row mb-3">
+    <div class="col-md-4 themed-grid-col">
+        <p><span>Date:</span> 2020-07-20 17:39:26</p>
+        <p><span>Total cases:</span>40</p>
+        <p><span>Passed:</span> 21</p>
+        <p><span>Failed:</span> 19</p>
+        <p><span>Skipped:</span> 0</p>
+        <p><span>Duration:</span> 0 h 0 m 6.62 s</p>
+		</div>
+    <div class="col-md-8 themed-grid-col" id="sumPie"></div>
+	<script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('sumPie'));
         var option = {
             title: {
                 text: 'Statistics by suite',
@@ -88,13 +100,16 @@
                 }
             },
             legend: {
-                data: ['passed', 'failed','skipped']
+                data: ['passed', 'failed', 'skipped']
             },
             grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true
+                left: 100
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    saveAsImage: {}
+                }
             },
             xAxis: {
                 type: 'value',
@@ -104,25 +119,25 @@
                 type: 'category',
 
                 data: [
-                                                'advanced algoritms',
-                                                'basic algoritms',
-                                        ]
+                                            'Random test2',
+                                            'Random test1',
+                                    ]
             },
             series: [
                 {
                     name: 'pass',
                     type: 'bar',
                     data: [
-                                                        2,
-                                                        28,
-                                                ]
+                                                        11,
+                                                        10,
+                                            ]
                 },
                 {
                     name: 'fail',
                     type: 'bar',
                     data: [
-                                                        0,
-                                                        1,
+                                                        9,
+                                                        10,
                                             ]
                 },
                 {
@@ -137,314 +152,405 @@
         };
         myChart.setOption(option);
     </script>
-
-    <div class="table-responsive">
-        <h2 class="card-title">Executed cases</h2>
-        <table class="table  table-hover" id="caseTable">
-            <thead class= "thead-light">
-            <tr>
-                <th>Suite</th>
-                <th>TestRun</th>
-                <th>Class</th>
-                <th>Groups</th>
-                <th>CaseName</th>
-                <th width="10%">Duration</th>
-                <th class="filter">Status</th>
-            </tr>
-            </thead>
-            <tbody>
-                                                                                    <tr>
-                            <td align="left">advanced algoritms</td>
-                            <td>dynamic programming</td>
-                            <td align="left">LCS.LCSTest</td>
-                            <td align="left">[]</td>
-                            <td align="left">testDPLCS</td>
-                            <td>0.016</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">advanced algoritms</td>
-                            <td>dynamic programming</td>
-                            <td align="left">LCS.LCSTest</td>
-                            <td align="left">[]</td>
-                            <td align="left">testRecursiveLCS</td>
-                            <td>0.008</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                                                                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting and string operation</td>
-                            <td align="left">ItemTest</td>
-                            <td align="left">[]</td>
-                            <td align="left">testBinarySearch</td>
-                            <td>0.008</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting and string operation</td>
-                            <td align="left">ItemTest</td>
-                            <td align="left">[]</td>
-                            <td align="left">testDateUtil</td>
-                            <td>0.016</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting and string operation</td>
-                            <td align="left">ItemTest</td>
-                            <td align="left">[]</td>
-                            <td align="left">testConverStringToInt</td>
-                            <td>0.0</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting and string operation</td>
-                            <td align="left">ItemTest</td>
-                            <td align="left">[]</td>
-                            <td align="left">testConvertDecimalToBinary</td>
-                            <td>0.0</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting and string operation</td>
-                            <td align="left">ItemTest</td>
-                            <td align="left">[]</td>
-                            <td align="left">testPrime</td>
-                            <td>0.0</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting and string operation</td>
-                            <td align="left">ItemTest</td>
-                            <td align="left">[]</td>
-                            <td align="left">testReverseInt</td>
-                            <td>0.008</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting and string operation</td>
-                            <td align="left">ItemTest</td>
-                            <td align="left">[]</td>
-                            <td align="left">testReverse</td>
-                            <td>0.0</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting and string operation</td>
-                            <td align="left">ItemTest</td>
-                            <td align="left">[]</td>
-                            <td align="left">testLenghtOfLongestSubstring</td>
-                            <td>0.0</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting and string operation</td>
-                            <td align="left">ItemTest</td>
-                            <td align="left">[]</td>
-                            <td align="left">testDivide</td>
-                            <td>0.0</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting and string operation</td>
-                            <td align="left">ItemTest</td>
-                            <td align="left">[]</td>
-                            <td align="left">testOverHalf</td>
-                            <td>0.0</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting and string operation</td>
-                            <td align="left">ItemTest</td>
-                            <td align="left">[]</td>
-                            <td align="left">testSerializeDeepCopy</td>
-                            <td>0.008</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting and string operation</td>
-                            <td align="left">ItemTest</td>
-                            <td align="left">[]</td>
-                            <td align="left">testSymmetric</td>
-                            <td>0.008</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting and string operation</td>
-                            <td align="left">ItemTest</td>
-                            <td align="left">[]</td>
-                            <td align="left">testTwoSum</td>
-                            <td>0.0</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting and string operation</td>
-                            <td align="left">ItemTest</td>
-                            <td align="left">[]</td>
-                            <td align="left">testisPalindromicNumber</td>
-                            <td>0.0</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                                                            <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting with data provider</td>
-                            <td align="left">sortTest</td>
-                            <td align="left">[]</td>
-                            <td align="left">testBubbleSort</td>
-                            <td>0.008</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting with data provider</td>
-                            <td align="left">sortTest</td>
-                            <td align="left">[]</td>
-                            <td align="left">testBubbleSort</td>
-                            <td>0.0</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting with data provider</td>
-                            <td align="left">demo.Regression</td>
-                            <td align="left">[]</td>
-                            <td align="left">deletePortfolio</td>
-                            <td>0.0</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting with data provider</td>
-                            <td align="left">sortTest</td>
-                            <td align="left">[]</td>
-                            <td align="left">testBubbleSort</td>
-                            <td>0.0</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting with data provider</td>
-                            <td align="left">demo.Regression</td>
-                            <td align="left">[]</td>
-                            <td align="left">addPortfolio</td>
-                            <td>0.0</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting with data provider</td>
-                            <td align="left">demo.Regression</td>
-                            <td align="left">[]</td>
-                            <td align="left">deleteyOthersPortfolio</td>
-                            <td>0.008</td>
-                                                            <td><span class="badge badge-danger">FAILURE</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting with data provider</td>
-                            <td align="left">demo.Regression</td>
-                            <td align="left">[]</td>
-                            <td align="left">modifyOthersPortfolio</td>
-                            <td>0.0</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting with data provider</td>
-                            <td align="left">demo.Smoke</td>
-                            <td align="left">[]</td>
-                            <td align="left">loginWithWrongPassword</td>
-                            <td>0.0</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting with data provider</td>
-                            <td align="left">demo.Regression</td>
-                            <td align="left">[]</td>
-                            <td align="left">queryPortfolio</td>
-                            <td>0.0</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting with data provider</td>
-                            <td align="left">demo.Smoke</td>
-                            <td align="left">[]</td>
-                            <td align="left">loginWithWrongUser</td>
-                            <td>0.0</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting with data provider</td>
-                            <td align="left">demo.Regression</td>
-                            <td align="left">[]</td>
-                            <td align="left">modifyPortfolio</td>
-                            <td>0.0</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting with data provider</td>
-                            <td align="left">demo.Regression</td>
-                            <td align="left">[]</td>
-                            <td align="left">queryOthersPortfolio</td>
-                            <td>0.0</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting with data provider</td>
-                            <td align="left">demo.Smoke</td>
-                            <td align="left">[]</td>
-                            <td align="left">normalLogin</td>
-                            <td>0.0</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting with data provider</td>
-                            <td align="left">demo.Smoke</td>
-                            <td align="left">[]</td>
-                            <td align="left">repeatLogin</td>
-                            <td>0.0</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                <tr>
-                            <td align="left">basic algoritms</td>
-                            <td>Sorting with data provider</td>
-                            <td align="left">demo.Smoke</td>
-                            <td align="left">[]</td>
-                            <td align="left">modifyPassword</td>
-                            <td>0.0</td>
-                                                            <td><span class="badge badge-success">SUCCESS</span></td>
-                                                    </tr>
-                                                                        </tbody>
-        </table>
-    </div>
+</div>
+</div>
+<h2>Executed cases</h2>
+<div class="mt-4">
+    <table class="table" id="caseTable">
+        <thead>
+        <tr>
+            <th>Suite</th>
+            <th>TestRun</th>
+            <th>Class</th>
+            <th>Groups</th>
+            <th>CaseName</th>
+            <th width="10%">Duration</th>
+            <th class="filter">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+                                                                    <tr>
+                        <td align="left">Random test2</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>1.99</td>
+                                                    <td><span class="badge badge-danger">FAILURE</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test2</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>0.511</td>
+                                                    <td><span class="badge badge-success">SUCCESS</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test2</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>0.082</td>
+                                                    <td><span class="badge badge-success">SUCCESS</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test2</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>0.942</td>
+                                                    <td><span class="badge badge-success">SUCCESS</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test2</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>0.219</td>
+                                                    <td><span class="badge badge-success">SUCCESS</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test2</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>2.143</td>
+                                                    <td><span class="badge badge-danger">FAILURE</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test2</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>0.043</td>
+                                                    <td><span class="badge badge-success">SUCCESS</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test2</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>1.69</td>
+                                                    <td><span class="badge badge-danger">FAILURE</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test2</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>1.515</td>
+                                                    <td><span class="badge badge-danger">FAILURE</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test2</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>1.795</td>
+                                                    <td><span class="badge badge-danger">FAILURE</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test2</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>2.901</td>
+                                                    <td><span class="badge badge-danger">FAILURE</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test2</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>0.163</td>
+                                                    <td><span class="badge badge-success">SUCCESS</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test2</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>2.473</td>
+                                                    <td><span class="badge badge-danger">FAILURE</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test2</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>0.916</td>
+                                                    <td><span class="badge badge-success">SUCCESS</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test2</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>0.842</td>
+                                                    <td><span class="badge badge-success">SUCCESS</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test2</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>0.768</td>
+                                                    <td><span class="badge badge-success">SUCCESS</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test2</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>1.375</td>
+                                                    <td><span class="badge badge-danger">FAILURE</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test2</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>0.114</td>
+                                                    <td><span class="badge badge-success">SUCCESS</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test2</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>0.815</td>
+                                                    <td><span class="badge badge-success">SUCCESS</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test2</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>1.86</td>
+                                                    <td><span class="badge badge-danger">FAILURE</span></td>
+                                            </tr>
+                                                                                                        <tr>
+                        <td align="left">Random test1</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>0.045</td>
+                                                    <td><span class="badge badge-success">SUCCESS</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test1</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>0.618</td>
+                                                    <td><span class="badge badge-success">SUCCESS</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test1</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>0.138</td>
+                                                    <td><span class="badge badge-success">SUCCESS</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test1</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>0.114</td>
+                                                    <td><span class="badge badge-success">SUCCESS</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test1</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>0.832</td>
+                                                    <td><span class="badge badge-success">SUCCESS</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test1</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>1.461</td>
+                                                    <td><span class="badge badge-danger">FAILURE</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test1</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>2.664</td>
+                                                    <td><span class="badge badge-danger">FAILURE</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test1</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>2.329</td>
+                                                    <td><span class="badge badge-danger">FAILURE</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test1</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>1.256</td>
+                                                    <td><span class="badge badge-danger">FAILURE</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test1</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>2.585</td>
+                                                    <td><span class="badge badge-danger">FAILURE</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test1</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>2.653</td>
+                                                    <td><span class="badge badge-danger">FAILURE</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test1</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>0.996</td>
+                                                    <td><span class="badge badge-success">SUCCESS</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test1</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>2.082</td>
+                                                    <td><span class="badge badge-danger">FAILURE</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test1</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>0.017</td>
+                                                    <td><span class="badge badge-success">SUCCESS</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test1</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>1.314</td>
+                                                    <td><span class="badge badge-danger">FAILURE</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test1</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>2.168</td>
+                                                    <td><span class="badge badge-danger">FAILURE</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test1</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>0.521</td>
+                                                    <td><span class="badge badge-success">SUCCESS</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test1</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>1.955</td>
+                                                    <td><span class="badge badge-danger">FAILURE</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test1</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>0.467</td>
+                                                    <td><span class="badge badge-success">SUCCESS</span></td>
+                                            </tr>
+                                        <tr>
+                        <td align="left">Random test1</td>
+                        <td>Sorting and string operation</td>
+                        <td align="left">RandomTest</td>
+                        <td align="left">[]</td>
+                        <td align="left">printRandom</td>
+                        <td>0.862</td>
+                                                    <td><span class="badge badge-success">SUCCESS</span></td>
+                                            </tr>
+                                                        </tbody>
+    </table>
+</div>
 </div>
 </body>
 <script>
-    // Use the plugin once the DOM has been loaded.
-    // $(function () {
-    //     // Apply the plugin
-    //     $('#caseTable').excelTableFilter();
-    // });
-    $(document).ready( function () {
+    $(document).ready(function () {
         $('#caseTable').DataTable();
-    } );
+    });
+
+    // function test(ele) {
+    //     let dom = ele
+    //     dom.fadeToggle();
+    // }
+
+    // if(dom.hasClass('dsn')){
+    //     dom.removeClass('dsn')
+    //     dom.addClass('show')
+    // }else{
+    //     dom.removeClass('show')
+    //     dom.addClass('dsn')
+    // }
+    // }
 </script>
 </html>

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javacup100.report4j.entity.AllSuites;
+import javacup100.report4j.utils.time.dateUtil;
 import org.apache.commons.io.FileUtils;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -35,6 +36,7 @@ public class ReporterImpl implements IReporter {
 		Template template = velocityEngine.getTemplate("report.vm", "utf-8");
 		VelocityContext velocityContext = new VelocityContext();
 		AllSuites allSuites=new AllSuites();
+		allSuites.setDate(dateUtil.toDateString(System.currentTimeMillis()));
 		int totalNumber=0,passed=0,failed=0,skipped=0;
 		double duration=0.0;
 		for (ISuite suite : suites) {

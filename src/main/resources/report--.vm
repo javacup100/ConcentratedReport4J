@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>Test Report</title>
+    <script src="js/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+    <script src="js/bootstrap-4.5.0-dist/js/bootstrap.min.js"></script>
+    <script src="js/echarts/echarts.min.js"></script>
+    <link rel="stylesheet" href="js/bootstrap-4.5.0-dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+    <style>
+        p{
+            color: #856404;
+        }
+        #main{
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        body{
+            background-color: #b3b7bb;
+        }
+        .table-responsive{
+            background-color: #fff
+        }
+        .box{
+            display: flex;
+        }
+        .list{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 49.9%;
+            height:300px;
+            border: solid 1px #ddd;
+        }
+        .show{
+            display:block;
+        }
+        .dsn{
+            display:none;
+        }
+    </style>
+
+</head>
+<body class="">
+
+##    <div class="box">
+##        <h2>Summary</h2>
+##        <div class="list" style="border-left: none">
+##            <table class="table">
+##                <thead>
+##                <tr>
+##                    <th>Total</th>
+##                    <th>Passed</th>
+##                    <th>Failed</th>
+##                    <th>Skipped</th>
+##                    <th>Duration</th>
+##                </tr>
+##                </thead>
+##                <tbody>
+##                <tr>
+##                    <td>$allSuites.getTotalNumber()</td>
+##                    <td>$allSuites.getPassedNumber()</td>
+##                    <td>$allSuites.getFailedNumber()</td>
+##                    <td>$allSuites.getSkippedNumber()</td>
+##                    <td>$allSuites.getDurationString()</td>
+##                </tr>
+##                </tbody>
+##            </table>
+##        </div>
+##        <div class="list" id="sumPie">
+##        </div>
+##        <div class="list" style="border-left: none">
+##            <table class="table  table-hover" id="caseTable">
+##                <thead class= "thead-light">
+##                <tr>
+##                    <th>Suite</th>
+##                    <th>TestRun</th>
+##                    <th>Class</th>
+##                    <th>Groups</th>
+##                    <th>CaseName</th>
+##                    <th width="10%">Duration</th>
+##                    <th class="filter">Status</th>
+##                </tr>
+##                </thead>
+##                <tbody>
+##                    #foreach ($suite in $suiteList)
+##                        #foreach($testRun in $suite.getTestRunResults())
+##                            #foreach($test in $testRun.getAllTests())
+##                            <tr onclick="test('$test.getName()')">
+##                                <td align="left">$suite.getSuiteName()</td>
+##                                <td>$testRun.getName()</td>
+##                                <td align="left">$test.getClassName()</td>
+##                                <td align="left">$test.getGroups()</td>
+##                                <td align="left">$test.getName()</td>
+##                                <td>$test.getDuration()</td>
+##                                #if($test.getStatus()=='SUCCESS')
+##                                    <td><span class="badge badge-success">$test.getStatus()</span></td>
+##                                #else
+##                                    <td><span class="badge badge-danger">$test.getStatus()</span></td>
+##                                #end
+##                            </tr>
+##                            <div id="$test.getName()" class="dsn">$test.getStackTrace()</div>
+##                            #end
+##                        #end
+##                    #end
+##                </tbody>
+##            </table>
+##        </div>
+##    </div>
+
+
+<div class="container-fluid" id="main">
+    <h2>Overall Statistics</h2>
+    <div class="row" style="height: 300px">
+        <div class="col-md-4" id="sum">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Total</th>
+                    <th>Passed</th>
+                    <th>Failed</th>
+                    <th>Skipped</th>
+                    <th>Duration</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>$allSuites.getTotalNumber()</td>
+                    <td>$allSuites.getPassedNumber()</td>
+                    <td>$allSuites.getFailedNumber()</td>
+                    <td>$allSuites.getSkippedNumber()</td>
+                    <td>$allSuites.getDurationString()</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="col-md-4" id="sumPie" ></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('sumPie'));
+        var option = {
+            title: {
+                text: 'Statistics by suite',
+                subtext: ''
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: {
+                data: ['passed', 'failed','skipped']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'value',
+                boundaryGap: [0, 0.01]
+            },
+            yAxis: {
+                type: 'category',
+
+                data: [
+                    #foreach ($suite in $suiteList)
+                            '$suite.getSuiteName()',
+                    #end
+                    ]
+            },
+            series: [
+                {
+                    name: 'pass',
+                    type: 'bar',
+                    data: [
+                        #foreach ($suite in $suiteList)
+                                $suite.getPassedNumber(),
+                        #end
+                        ]
+                },
+                {
+                    name: 'fail',
+                    type: 'bar',
+                    data: [
+                        #foreach ($suite in $suiteList)
+                                $suite.getFailedNumber(),
+                        #end
+                    ]
+                },
+                {
+                    name: 'skipp',
+                    type: 'bar',
+                    data: [
+                        #foreach ($suite in $suiteList)
+                                $suite.getSkippedNumber(),
+                        #end
+                    ]
+                }
+            ]
+        };
+        myChart.setOption(option);
+    </script>
+
+    <div class="table-responsive">
+        <h2 class="card-title">Executed cases</h2>
+        <table class="table  table-hover" id="caseTable">
+            <thead class= "thead-light">
+            <tr>
+                <th>Suite</th>
+                <th>TestRun</th>
+                <th>Class</th>
+                <th>Groups</th>
+                <th>CaseName</th>
+                <th width="10%">Duration</th>
+                <th class="filter">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+                #foreach ($suite in $suiteList)
+                    #foreach($testRun in $suite.getTestRunResults())
+                        #foreach($test in $testRun.getAllTests())
+                        <tr onclick="test($(this).next())">
+                            <td align="left">$suite.getSuiteName()</td>
+                            <td>$testRun.getName()</td>
+                            <td align="left">$test.getClassName()</td>
+                            <td align="left">$test.getGroups()</td>
+                            <td align="left">$test.getName()</td>
+                            <td>$test.getDuration()</td>
+                            #if($test.getStatus()=='SUCCESS')
+                                <td><span class="badge badge-success">$test.getStatus()</span></td>
+                            #else
+                                <td><span class="badge badge-danger">$test.getStatus()</span></td>
+                            #end
+                        </tr>
+##                        <tr id="random()" class="dsn">
+##                            <td align="left"></td>
+##                            <td></td>
+##                            <td align="left"></td>
+##                            <td align="left"></td>
+##                            <td align="left"></td>
+##                            <td></td>
+##                            <td>$test.getStackTrace()</td>
+##                        </tr>
+                        #end
+                    #end
+                #end
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+<script>
+    $(document).ready( function () {
+        $('#caseTable').DataTable();
+    } );
+    function test(ele){
+        let dom =ele
+        if(dom.hasClass('dsn')){
+            dom.removeClass('dsn')
+            dom.addClass('show')
+        }else{
+            dom.removeClass('show')
+            dom.addClass('dsn')
+        }
+    }
+    function random() {
+        var x = 10000;
+        var y = 1000;
+        var rand = parseInt(Math.random() * (x - y + 1) + y);
+        return rand;
+    }
+</script>
+</html>

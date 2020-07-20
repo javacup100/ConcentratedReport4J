@@ -9,6 +9,15 @@ public class AllSuites {
     private int skippedNumber;
     private Double duration;
     private String durationString;
+    private String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public int getTotalNumber() {
         return totalNumber;
