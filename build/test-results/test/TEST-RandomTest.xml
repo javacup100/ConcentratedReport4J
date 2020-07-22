@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="RandomTest" tests="40" skipped="0" failures="27" errors="0" timestamp="2020-07-22T04:03:49" hostname="LAPTOP-VM3AER1A" time="8.813">
+<testsuite name="RandomTest" tests="40" skipped="0" failures="23" errors="0" timestamp="2020-07-22T04:15:48" hostname="LAPTOP-VM3AER1A" time="8.309">
   <properties/>
-  <testcase name="printRandom" classname="RandomTest" time="0.764"/>
-  <testcase name="printRandom" classname="RandomTest" time="0.855"/>
-  <testcase name="printRandom" classname="RandomTest" time="0.901"/>
-  <testcase name="printRandom" classname="RandomTest" time="0.116"/>
-  <testcase name="printRandom" classname="RandomTest" time="1.099"/>
-  <testcase name="printRandom" classname="RandomTest" time="0.18"/>
-  <testcase name="printRandom" classname="RandomTest" time="1.219">
+  <testcase name="printRandom" classname="RandomTest" time="0.037"/>
+  <testcase name="printRandom" classname="RandomTest" time="0.243"/>
+  <testcase name="printRandom" classname="RandomTest" time="0.533"/>
+  <testcase name="printRandom" classname="RandomTest" time="0.775"/>
+  <testcase name="printRandom" classname="RandomTest" time="0.87"/>
+  <testcase name="printRandom" classname="RandomTest" time="0.361"/>
+  <testcase name="printRandom" classname="RandomTest" time="1.549">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -29,7 +29,7 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="1.463">
+  <testcase name="printRandom" classname="RandomTest" time="1.607">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -51,7 +51,7 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="1.662">
+  <testcase name="printRandom" classname="RandomTest" time="1.842">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -73,7 +73,7 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="1.828">
+  <testcase name="printRandom" classname="RandomTest" time="1.98">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -95,7 +95,10 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="1.257">
+  <testcase name="printRandom" classname="RandomTest" time="0.447"/>
+  <testcase name="printRandom" classname="RandomTest" time="1.135"/>
+  <testcase name="printRandom" classname="RandomTest" time="0.072"/>
+  <testcase name="printRandom" classname="RandomTest" time="2.157">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -117,7 +120,8 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="1.366">
+  <testcase name="printRandom" classname="RandomTest" time="0.362"/>
+  <testcase name="printRandom" classname="RandomTest" time="2.494">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -139,7 +143,7 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="1.442">
+  <testcase name="printRandom" classname="RandomTest" time="1.738">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -161,7 +165,7 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="2.661">
+  <testcase name="printRandom" classname="RandomTest" time="2.397">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -183,7 +187,7 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="2.757">
+  <testcase name="printRandom" classname="RandomTest" time="2.466">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -205,52 +209,7 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="0.973"/>
-  <testcase name="printRandom" classname="RandomTest" time="2.579">
-    <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
-	at org.testng.Assert.fail(Assert.java:96)
-	at org.testng.Assert.failNotEquals(Assert.java:776)
-	at org.testng.Assert.assertTrue(Assert.java:44)
-	at org.testng.Assert.assertTrue(Assert.java:54)
-	at RandomTest.printRandom(RandomTest.java:22)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
-	at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
-	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
-	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
-</failure>
-  </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="2.908">
-    <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
-	at org.testng.Assert.fail(Assert.java:96)
-	at org.testng.Assert.failNotEquals(Assert.java:776)
-	at org.testng.Assert.assertTrue(Assert.java:44)
-	at org.testng.Assert.assertTrue(Assert.java:54)
-	at RandomTest.printRandom(RandomTest.java:22)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
-	at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
-	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
-	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
-</failure>
-  </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="2.755">
+  <testcase name="printRandom" classname="RandomTest" time="2.415">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -271,7 +230,12 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="2.817">
+  <testcase name="printRandom" classname="RandomTest" time="0.14"/>
+  <testcase name="printRandom" classname="RandomTest" time="0.004"/>
+  <testcase name="printRandom" classname="RandomTest" time="0.182"/>
+  <testcase name="printRandom" classname="RandomTest" time="0.915"/>
+  <testcase name="printRandom" classname="RandomTest" time="1.131"/>
+  <testcase name="printRandom" classname="RandomTest" time="1.263">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -292,12 +256,7 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="0.131"/>
-  <testcase name="printRandom" classname="RandomTest" time="0.275"/>
-  <testcase name="printRandom" classname="RandomTest" time="0.58"/>
-  <testcase name="printRandom" classname="RandomTest" time="0.631"/>
-  <testcase name="printRandom" classname="RandomTest" time="0.712"/>
-  <testcase name="printRandom" classname="RandomTest" time="1.305">
+  <testcase name="printRandom" classname="RandomTest" time="1.597">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -318,7 +277,7 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="1.375">
+  <testcase name="printRandom" classname="RandomTest" time="1.692">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -339,8 +298,8 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="0.105"/>
-  <testcase name="printRandom" classname="RandomTest" time="1.529">
+  <testcase name="printRandom" classname="RandomTest" time="0.329"/>
+  <testcase name="printRandom" classname="RandomTest" time="2.286">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -361,7 +320,8 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="1.574">
+  <testcase name="printRandom" classname="RandomTest" time="0.332"/>
+  <testcase name="printRandom" classname="RandomTest" time="2.395">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -382,7 +342,7 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="1.473">
+  <testcase name="printRandom" classname="RandomTest" time="2.355">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -403,7 +363,7 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="2.301">
+  <testcase name="printRandom" classname="RandomTest" time="1.337">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -424,7 +384,7 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="2.28">
+  <testcase name="printRandom" classname="RandomTest" time="2.721">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -445,7 +405,7 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="2.322">
+  <testcase name="printRandom" classname="RandomTest" time="2.829">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -466,7 +426,7 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="1.374">
+  <testcase name="printRandom" classname="RandomTest" time="1.348">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -487,7 +447,7 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="2.267">
+  <testcase name="printRandom" classname="RandomTest" time="2.156">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -508,7 +468,7 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="2.83">
+  <testcase name="printRandom" classname="RandomTest" time="2.285">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -529,49 +489,7 @@
 	at java.lang.Thread.run(Thread.java:748)
 </failure>
   </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="2.488">
-    <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
-	at org.testng.Assert.fail(Assert.java:96)
-	at org.testng.Assert.failNotEquals(Assert.java:776)
-	at org.testng.Assert.assertTrue(Assert.java:44)
-	at org.testng.Assert.assertTrue(Assert.java:54)
-	at RandomTest.printRandom(RandomTest.java:22)
-	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
-	at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
-	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
-	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
-</failure>
-  </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="2.56">
-    <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
-	at org.testng.Assert.fail(Assert.java:96)
-	at org.testng.Assert.failNotEquals(Assert.java:776)
-	at org.testng.Assert.assertTrue(Assert.java:44)
-	at org.testng.Assert.assertTrue(Assert.java:54)
-	at RandomTest.printRandom(RandomTest.java:22)
-	at sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
-	at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
-	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
-	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
-	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
-	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
-</failure>
-  </testcase>
-  <testcase name="printRandom" classname="RandomTest" time="2.747">
+  <testcase name="printRandom" classname="RandomTest" time="1.992">
     <failure message="java.lang.AssertionError: expected [true] but found [false]" type="java.lang.AssertionError">java.lang.AssertionError: expected [true] but found [false]
 	at org.testng.Assert.fail(Assert.java:96)
 	at org.testng.Assert.failNotEquals(Assert.java:776)
@@ -595,114 +513,114 @@
   <system-out><![CDATA[test printRandom starts......
 test printRandom starts......
 test printRandom starts......
-test printRandom starts......
-test printRandom starts......
 test [Ljava.lang.Object;@7683724c
-test [Ljava.lang.Object;@1ce1af89
-test [Ljava.lang.Object;@5e75899d
+test [Ljava.lang.Object;@3054a5d
 test printRandom starts......
 test printRandom starts......
-test [Ljava.lang.Object;@5d54c864
-test [Ljava.lang.Object;@6aedff14
-test [Ljava.lang.Object;@13988c5
-test [Ljava.lang.Object;@6e8340d0
+test [Ljava.lang.Object;@6e8d6e12
+test [Ljava.lang.Object;@6f025b17
+test [Ljava.lang.Object;@4bb88c07
 test printRandom starts......
-test [Ljava.lang.Object;@3416bef5
+test [Ljava.lang.Object;@5826e8de
 test printRandom starts......
+test [Ljava.lang.Object;@337c4759
 test printRandom starts......
 test [Ljava.lang.Object;@59277e9d
-test [Ljava.lang.Object;@474ff9a0
+test printRandom starts......
+test printRandom starts......
+test [Ljava.lang.Object;@b21aae6
+test [Ljava.lang.Object;@3b18878b
 test printRandom status: 1
 test printRandom starts......
-test [Ljava.lang.Object;@4eb5ee14
+test [Ljava.lang.Object;@d075449
 test printRandom status: 1
 test printRandom starts......
-test [Ljava.lang.Object;@79575c60
+test [Ljava.lang.Object;@13988c5
 test printRandom status: 1
 test printRandom starts......
-test [Ljava.lang.Object;@6bb3b665
+test [Ljava.lang.Object;@34e0e1b7
 test printRandom status: 1
 test printRandom starts......
-test [Ljava.lang.Object;@63be100d
+test [Ljava.lang.Object;@48ebff16
 test printRandom status: 1
 test printRandom starts......
-test [Ljava.lang.Object;@1e3b747a
+test [Ljava.lang.Object;@2e773eaa
 test printRandom status: 1
 test printRandom starts......
-test [Ljava.lang.Object;@2a429004
+test [Ljava.lang.Object;@257675ec
 test printRandom status: 2
 test printRandom starts......
-test [Ljava.lang.Object;@cf333ae
+test [Ljava.lang.Object;@7c5528d8
 test printRandom status: 2
 test printRandom starts......
 test [Ljava.lang.Object;@377ef5c9
 test printRandom status: 2
 test printRandom starts......
-test [Ljava.lang.Object;@2500c5b4
+test [Ljava.lang.Object;@48abb280
 test printRandom status: 2
 test printRandom starts......
-test [Ljava.lang.Object;@1ca24a40
-test printRandom status: 2
-test printRandom status: 2
-test printRandom status: 2
-test printRandom status: 2
+test [Ljava.lang.Object;@26282b16
+test printRandom status: 1
+test printRandom status: 1
+test printRandom status: 1
 test printRandom status: 2
 test printRandom status: 1
 test printRandom status: 2
 test printRandom status: 2
 test printRandom status: 2
 test printRandom status: 2
-test printRandom starts......
-test [Ljava.lang.Object;@42744b80
-test printRandom starts......
-test [Ljava.lang.Object;@4b8d35af
-test printRandom starts......
-test printRandom starts......
-test [Ljava.lang.Object;@40419511
-test printRandom starts......
-test [Ljava.lang.Object;@302e7e5d
-test printRandom starts......
-test [Ljava.lang.Object;@2ec1e881
-test printRandom starts......
-test printRandom starts......
-test [Ljava.lang.Object;@411fd503
-test [Ljava.lang.Object;@5da718ec
-test printRandom starts......
-test [Ljava.lang.Object;@2f7b8b80
-test printRandom starts......
-test [Ljava.lang.Object;@4c6efe13
-test [Ljava.lang.Object;@65d9c875
-test printRandom status: 1
-test printRandom starts......
-test [Ljava.lang.Object;@4200fc3f
-test printRandom status: 1
-test printRandom starts......
-test [Ljava.lang.Object;@7a8c9c17
-test printRandom status: 1
-test printRandom starts......
-test [Ljava.lang.Object;@38d43bf
-test printRandom status: 1
-test printRandom starts......
-test [Ljava.lang.Object;@727f6192
-test printRandom status: 1
-test printRandom starts......
-test [Ljava.lang.Object;@34cace27
 test printRandom status: 2
 test printRandom starts......
-test [Ljava.lang.Object;@8caf42
-test printRandom status: 2
+test [Ljava.lang.Object;@7baa514b
 test printRandom starts......
-test [Ljava.lang.Object;@3a3f7a84
+test printRandom starts......
+test [Ljava.lang.Object;@2cf0c277
+test [Ljava.lang.Object;@3005b584
+test printRandom starts......
+test printRandom starts......
+test [Ljava.lang.Object;@7385e7cb
+test [Ljava.lang.Object;@28220222
+test printRandom starts......
+test [Ljava.lang.Object;@7518b3c
+test printRandom starts......
+test [Ljava.lang.Object;@1b7fc79
+test printRandom starts......
+test [Ljava.lang.Object;@705ef7b4
+test printRandom starts......
+test [Ljava.lang.Object;@7c1b085c
+test printRandom starts......
+test [Ljava.lang.Object;@7b0bebe0
 test printRandom status: 1
 test printRandom starts......
-test [Ljava.lang.Object;@6b0cc9c7
+test [Ljava.lang.Object;@215947ca
+test printRandom status: 1
+test printRandom starts......
+test [Ljava.lang.Object;@598c0c43
+test printRandom status: 1
+test printRandom starts......
+test [Ljava.lang.Object;@3a2634
+test printRandom status: 1
+test printRandom starts......
+test [Ljava.lang.Object;@7ea4a0d7
+test printRandom status: 1
+test printRandom starts......
+test [Ljava.lang.Object;@7b528d08
 test printRandom status: 2
 test printRandom starts......
-test [Ljava.lang.Object;@50018112
+test [Ljava.lang.Object;@238a2de0
 test printRandom status: 2
 test printRandom starts......
-test [Ljava.lang.Object;@7ba3c839
+test [Ljava.lang.Object;@ad19525
 test printRandom status: 2
+test printRandom starts......
+test [Ljava.lang.Object;@19c0ef16
+test printRandom status: 1
+test printRandom starts......
+test [Ljava.lang.Object;@33767533
+test printRandom status: 2
+test printRandom starts......
+test [Ljava.lang.Object;@3335526b
+test printRandom status: 1
 test printRandom status: 2
 test printRandom status: 2
 test printRandom status: 2
