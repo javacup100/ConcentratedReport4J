@@ -8,26 +8,11 @@
     <script src="js/bootstrap-4.5.0-dist/js/bootstrap.min.js"></script>
     <script src="js/echarts/echarts.min.js"></script>
     <link rel="stylesheet" href="js/bootstrap-4.5.0-dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
-    <script type="text/javascript" charset="utf8"
-            src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
-    <script>
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
-                function random() {
-            var x = 10000;
-            var y = 1000;
-            var rand = parseInt(Math.random() * (x - y + 1) + y);
-            return rand;
-        }
-    </script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <style>
         p {
             color: #856404;
-        }
-
-        #main {
-            margin-left: 10px;
-            margin-right: 10px;
         }
 
         body {
@@ -51,18 +36,524 @@
             border: solid 1px #ddd;
         }
 
-        /*.show {*/
-        /*    display: block;*/
-        /*}*/
-
-        /*.dsn {*/
-        /*    display: none;*/
-        /*}*/
         span {
             font-weight: bold;
         }
-    </style>
 
+        td.details-control {
+            background: url('js/icons/details_open.png') no-repeat center center;
+            cursor: pointer;
+        }
+
+        tr.details td.details-control {
+            background: url('js/icons/details_close.png') no-repeat center center;
+        }
+    </style>
+    <script>
+        var exceptions = {
+                                                                            1011297708: " ",
+                                                2115641758: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                1535483825: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                251024599: " ",
+                                                623983432: " ",
+                                                168360097: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                2106037830: " ",
+                                                1105933773: " ",
+                                                1840037315: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                539790631: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                1641552578: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                2030378601: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                1901065775: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                894306452: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                341904117: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                1261883487: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                307490461: " ",
+                                                1655173129: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                535715882: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                1519026561: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                                                                                1461758795: " ",
+                                                173682206: " ",
+                                                1717166159: " ",
+                                                1758585740: " ",
+                                                981034798: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                1627948193: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                1224366935: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                802167879: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                1591828100: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                2070537333: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                1641228460: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                1322132213: " ",
+                                                437211350: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                779179438: " ",
+                                                1453297284: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                1777981224: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                152085281: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                761809800: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                120130319: "org.testng.Assert.fail(Assert.java:96)<br>org.testng.Assert.failNotEquals(Assert.java:776)<br>org.testng.Assert.assertTrue(Assert.java:44)<br>org.testng.Assert.assertTrue(Assert.java:54)<br>RandomTest.printRandom(RandomTest.java:22)<br>sun.reflect.GeneratedMethodAccessor3.invoke(Unknown Source)<br>sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br>java.lang.reflect.Method.invoke(Method.java:498)<br>org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)<br>org.testng.internal.Invoker.invokeMethod(Invoker.java:583)<br>org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)<br>org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)<br>org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)<br>org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)<br>java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)<br>java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)<br>java.lang.Thread.run(Thread.java:748)",
+                                                542035029: " ",
+                                                        };
+        var caseData = [
+                                                                        {
+                            Suite: "Random test2",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "0.275",
+                                                            Status: '<span class="badge badge-success">SUCCESS</span>',
+                                                        DT_RowId: "1011297708"
+                        },
+                                            {
+                            Suite: "Random test2",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "1.375",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "2115641758"
+                        },
+                                            {
+                            Suite: "Random test2",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "1.529",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "1535483825"
+                        },
+                                            {
+                            Suite: "Random test2",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "0.131",
+                                                            Status: '<span class="badge badge-success">SUCCESS</span>',
+                                                        DT_RowId: "251024599"
+                        },
+                                            {
+                            Suite: "Random test2",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "0.631",
+                                                            Status: '<span class="badge badge-success">SUCCESS</span>',
+                                                        DT_RowId: "623983432"
+                        },
+                                            {
+                            Suite: "Random test2",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "1.305",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "168360097"
+                        },
+                                            {
+                            Suite: "Random test2",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "0.58",
+                                                            Status: '<span class="badge badge-success">SUCCESS</span>',
+                                                        DT_RowId: "2106037830"
+                        },
+                                            {
+                            Suite: "Random test2",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "0.712",
+                                                            Status: '<span class="badge badge-success">SUCCESS</span>',
+                                                        DT_RowId: "1105933773"
+                        },
+                                            {
+                            Suite: "Random test2",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "2.301",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "1840037315"
+                        },
+                                            {
+                            Suite: "Random test2",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "1.574",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "539790631"
+                        },
+                                            {
+                            Suite: "Random test2",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "2.28",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "1641552578"
+                        },
+                                            {
+                            Suite: "Random test2",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "2.322",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "2030378601"
+                        },
+                                            {
+                            Suite: "Random test2",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "1.473",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "1901065775"
+                        },
+                                            {
+                            Suite: "Random test2",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "2.83",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "894306452"
+                        },
+                                            {
+                            Suite: "Random test2",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "2.267",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "341904117"
+                        },
+                                            {
+                            Suite: "Random test2",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "1.374",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "1261883487"
+                        },
+                                            {
+                            Suite: "Random test2",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "0.105",
+                                                            Status: '<span class="badge badge-success">SUCCESS</span>',
+                                                        DT_RowId: "307490461"
+                        },
+                                            {
+                            Suite: "Random test2",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "2.56",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "1655173129"
+                        },
+                                            {
+                            Suite: "Random test2",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "2.488",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "535715882"
+                        },
+                                            {
+                            Suite: "Random test2",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "2.747",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "1519026561"
+                        },
+                                                                                                            {
+                            Suite: "Random test1",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "0.855",
+                                                            Status: '<span class="badge badge-success">SUCCESS</span>',
+                                                        DT_RowId: "1461758795"
+                        },
+                                            {
+                            Suite: "Random test1",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "0.901",
+                                                            Status: '<span class="badge badge-success">SUCCESS</span>',
+                                                        DT_RowId: "173682206"
+                        },
+                                            {
+                            Suite: "Random test1",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "1.099",
+                                                            Status: '<span class="badge badge-success">SUCCESS</span>',
+                                                        DT_RowId: "1717166159"
+                        },
+                                            {
+                            Suite: "Random test1",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "0.764",
+                                                            Status: '<span class="badge badge-success">SUCCESS</span>',
+                                                        DT_RowId: "1758585740"
+                        },
+                                            {
+                            Suite: "Random test1",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "1.219",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "981034798"
+                        },
+                                            {
+                            Suite: "Random test1",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "1.662",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "1627948193"
+                        },
+                                            {
+                            Suite: "Random test1",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "2.661",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "1224366935"
+                        },
+                                            {
+                            Suite: "Random test1",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "2.757",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "802167879"
+                        },
+                                            {
+                            Suite: "Random test1",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "1.463",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "1591828100"
+                        },
+                                            {
+                            Suite: "Random test1",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "1.828",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "2070537333"
+                        },
+                                            {
+                            Suite: "Random test1",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "2.579",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "1641228460"
+                        },
+                                            {
+                            Suite: "Random test1",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "0.116",
+                                                            Status: '<span class="badge badge-success">SUCCESS</span>',
+                                                        DT_RowId: "1322132213"
+                        },
+                                            {
+                            Suite: "Random test1",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "1.257",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "437211350"
+                        },
+                                            {
+                            Suite: "Random test1",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "0.18",
+                                                            Status: '<span class="badge badge-success">SUCCESS</span>',
+                                                        DT_RowId: "779179438"
+                        },
+                                            {
+                            Suite: "Random test1",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "1.366",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "1453297284"
+                        },
+                                            {
+                            Suite: "Random test1",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "1.442",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "1777981224"
+                        },
+                                            {
+                            Suite: "Random test1",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "2.908",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "152085281"
+                        },
+                                            {
+                            Suite: "Random test1",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "2.755",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "761809800"
+                        },
+                                            {
+                            Suite: "Random test1",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "2.817",
+                                                            Status: '<span class="badge badge-danger">FAILURE</span>',
+                                                        DT_RowId: "120130319"
+                        },
+                                            {
+                            Suite: "Random test1",
+                            TestRun: "Sorting and string operation",
+                            Class: "RandomTest",
+                            Groups: "[]",
+                            CaseName: "printRandom",
+                            Duration: "0.973",
+                                                            Status: '<span class="badge badge-success">SUCCESS</span>',
+                                                        DT_RowId: "542035029"
+                        },
+                                                        ]
+
+        function format(d) {
+            return exceptions[d];
+        }
+
+        $(document).ready(function () {
+            var dt = $('#caseTable').DataTable({
+                "data": caseData,
+                "processing": true,
+                "serverSide": false,
+                "columns": [
+                    {
+                        "class": "details-control",
+                        "orderable": false,
+                        "data": null,
+                        "defaultContent": ""
+                    },
+                    {"data": "Suite"},
+                    {"data": "TestRun"},
+                    {"data": "Class"},
+                    {"data": "Groups"},
+                    {"data": "CaseName"},
+                    {"data": "Duration"},
+                    {"data": "Status"}
+                ],
+                "order": [[1, 'asc']]
+            });
+
+            // Array to track the ids of the details displayed rows
+            var detailRows = [];
+
+            $('#caseTable tbody').on('click', 'tr td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = dt.row(tr);
+                var idx = $.inArray(tr.attr('id'), detailRows);
+                if (row.child.isShown()) {
+                    tr.removeClass('details');
+                    row.child.hide();
+
+                    // Remove from the 'open' array
+                    detailRows.splice(idx, 1);
+                } else {
+                    tr.addClass('details');
+                    row.child(format(row.id())).show();
+
+                    // Add to the 'open' array
+                    if (idx === -1) {
+                        detailRows.push(tr.attr('id'));
+                    }
+                }
+            });
+
+            // On each draw, loop over the `detailRows` array and show any child rows
+            dt.on('draw', function () {
+                $.each(detailRows, function (i, id) {
+                    $('#' + id + ' td.details-control').trigger('click');
+                });
+            });
+        });
+    </script>
 </head>
 <body class="">
 
@@ -70,12 +561,12 @@
     <div class="list" style="border-left: none">
         <h3>Summary</h3>
         <div class="list">
-            <p><span>Date:</span> 2020-07-22 09:46:02</p>
+            <p><span>Date:</span> 2020-07-22 12:03:58</p>
             <p><span>Total cases:</span>40</p>
-            <p><span>Passed:</span> 18</p>
-            <p><span>Failed:</span> 22</p>
+            <p><span>Passed:</span> 13</p>
+            <p><span>Failed:</span> 27</p>
             <p><span>Skipped:</span> 0</p>
-            <p><span>Duration:</span> 0 h 0 m 8.28 s</p>
+            <p><span>Duration:</span> 0 h 0 m 8.83 s</p>
         </div>
         <div id="overall" class="list"></div>
         <script type="text/javascript">
@@ -111,8 +602,8 @@
                             show: false
                         },
                         data: [
-                            {value: 18, name: 'passed'},
-                            {value: 22, name: 'failed'},
+                            {value: 13, name: 'passed'},
+                            {value: 27, name: 'failed'},
                             {value: 0, name: 'skipped'}
                         ]
                     }
@@ -166,16 +657,16 @@
                     name: 'pass',
                     type: 'bar',
                     data: [
-                                                        9,
-                                                        9,
+                                                        6,
+                                                        7,
                                             ]
                 },
                 {
                     name: 'fail',
                     type: 'bar',
                     data: [
-                                                        11,
-                                                        11,
+                                                        14,
+                                                        13,
                                             ]
                 },
                 {
@@ -195,9 +686,10 @@
 
 <div class="table-responsive" style="width: 90%">
     <h3>Executed cases</h3>
-    <table class="table table-striped table-bordered table-hover table-full-width" id="caseTable">
+    <table class="display" id="caseTable">
         <thead>
         <tr>
+            <th></th>
             <th>Suite</th>
             <th>TestRun</th>
             <th>Class</th>
@@ -207,408 +699,8 @@
             <th class="filter">Status</th>
         </tr>
         </thead>
-        <tbody>
-                                                                    <tr id="748157534">
-                        <td align="left">Random test2</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>0.331</td>
-                                                    <td><span class="badge badge-success">SUCCESS</span></td>
-                                            </tr>
-                                        <tr id="668495393">
-                        <td align="left">Random test2</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>2.248</td>
-                                                    <td><span class="badge badge-danger">FAILURE</span></td>
-                                            </tr>
-                                        <tr id="881730958">
-                        <td align="left">Random test2</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>0.123</td>
-                                                    <td><span class="badge badge-success">SUCCESS</span></td>
-                                            </tr>
-                                        <tr id="144341730">
-                        <td align="left">Random test2</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>0.136</td>
-                                                    <td><span class="badge badge-success">SUCCESS</span></td>
-                                            </tr>
-                                        <tr id="699934924">
-                        <td align="left">Random test2</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>2.962</td>
-                                                    <td><span class="badge badge-danger">FAILURE</span></td>
-                                            </tr>
-                                        <tr id="1307959996">
-                        <td align="left">Random test2</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>2.521</td>
-                                                    <td><span class="badge badge-danger">FAILURE</span></td>
-                                            </tr>
-                                        <tr id="135400665">
-                        <td align="left">Random test2</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>0.804</td>
-                                                    <td><span class="badge badge-success">SUCCESS</span></td>
-                                            </tr>
-                                        <tr id="1392786003">
-                        <td align="left">Random test2</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>1.854</td>
-                                                    <td><span class="badge badge-danger">FAILURE</span></td>
-                                            </tr>
-                                        <tr id="1502638955">
-                        <td align="left">Random test2</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>2.134</td>
-                                                    <td><span class="badge badge-danger">FAILURE</span></td>
-                                            </tr>
-                                        <tr id="1107085380">
-                        <td align="left">Random test2</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>0.828</td>
-                                                    <td><span class="badge badge-success">SUCCESS</span></td>
-                                            </tr>
-                                        <tr id="869840010">
-                        <td align="left">Random test2</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>1.793</td>
-                                                    <td><span class="badge badge-danger">FAILURE</span></td>
-                                            </tr>
-                                        <tr id="483404648">
-                        <td align="left">Random test2</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>1.869</td>
-                                                    <td><span class="badge badge-danger">FAILURE</span></td>
-                                            </tr>
-                                        <tr id="1174472882">
-                        <td align="left">Random test2</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>1.624</td>
-                                                    <td><span class="badge badge-danger">FAILURE</span></td>
-                                            </tr>
-                                        <tr id="1628980958">
-                        <td align="left">Random test2</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>0.936</td>
-                                                    <td><span class="badge badge-success">SUCCESS</span></td>
-                                            </tr>
-                                        <tr id="168046706">
-                        <td align="left">Random test2</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>0.542</td>
-                                                    <td><span class="badge badge-success">SUCCESS</span></td>
-                                            </tr>
-                                        <tr id="1728277985">
-                        <td align="left">Random test2</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>0.237</td>
-                                                    <td><span class="badge badge-success">SUCCESS</span></td>
-                                            </tr>
-                                        <tr id="1213400541">
-                        <td align="left">Random test2</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>2.011</td>
-                                                    <td><span class="badge badge-danger">FAILURE</span></td>
-                                            </tr>
-                                        <tr id="1486636825">
-                        <td align="left">Random test2</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>2.153</td>
-                                                    <td><span class="badge badge-danger">FAILURE</span></td>
-                                            </tr>
-                                        <tr id="873294785">
-                        <td align="left">Random test2</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>1.844</td>
-                                                    <td><span class="badge badge-danger">FAILURE</span></td>
-                                            </tr>
-                                        <tr id="1468336932">
-                        <td align="left">Random test2</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>1.153</td>
-                                                    <td><span class="badge badge-success">SUCCESS</span></td>
-                                            </tr>
-                                                                                                        <tr id="128483812">
-                        <td align="left">Random test1</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>0.279</td>
-                                                    <td><span class="badge badge-success">SUCCESS</span></td>
-                                            </tr>
-                                        <tr id="1026996871">
-                        <td align="left">Random test1</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>0.58</td>
-                                                    <td><span class="badge badge-success">SUCCESS</span></td>
-                                            </tr>
-                                        <tr id="1656397187">
-                        <td align="left">Random test1</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>0.511</td>
-                                                    <td><span class="badge badge-success">SUCCESS</span></td>
-                                            </tr>
-                                        <tr id="496592603">
-                        <td align="left">Random test1</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>1.155</td>
-                                                    <td><span class="badge badge-success">SUCCESS</span></td>
-                                            </tr>
-                                        <tr id="1593668397">
-                        <td align="left">Random test1</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>1.773</td>
-                                                    <td><span class="badge badge-danger">FAILURE</span></td>
-                                            </tr>
-                                        <tr id="1444354295">
-                        <td align="left">Random test1</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>1.608</td>
-                                                    <td><span class="badge badge-danger">FAILURE</span></td>
-                                            </tr>
-                                        <tr id="1626849587">
-                        <td align="left">Random test1</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>2.806</td>
-                                                    <td><span class="badge badge-danger">FAILURE</span></td>
-                                            </tr>
-                                        <tr id="906939464">
-                        <td align="left">Random test1</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>2.719</td>
-                                                    <td><span class="badge badge-danger">FAILURE</span></td>
-                                            </tr>
-                                        <tr id="64988607">
-                        <td align="left">Random test1</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>1.562</td>
-                                                    <td><span class="badge badge-danger">FAILURE</span></td>
-                                            </tr>
-                                        <tr id="1843516819">
-                        <td align="left">Random test1</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>2.726</td>
-                                                    <td><span class="badge badge-danger">FAILURE</span></td>
-                                            </tr>
-                                        <tr id="859926341">
-                        <td align="left">Random test1</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>2.686</td>
-                                                    <td><span class="badge badge-danger">FAILURE</span></td>
-                                            </tr>
-                                        <tr id="1944951273">
-                        <td align="left">Random test1</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>0.183</td>
-                                                    <td><span class="badge badge-success">SUCCESS</span></td>
-                                            </tr>
-                                        <tr id="232863862">
-                        <td align="left">Random test1</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>0.514</td>
-                                                    <td><span class="badge badge-success">SUCCESS</span></td>
-                                            </tr>
-                                        <tr id="1850681620">
-                        <td align="left">Random test1</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>1.11</td>
-                                                    <td><span class="badge badge-success">SUCCESS</span></td>
-                                            </tr>
-                                        <tr id="1456232671">
-                        <td align="left">Random test1</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>1.323</td>
-                                                    <td><span class="badge badge-danger">FAILURE</span></td>
-                                            </tr>
-                                        <tr id="1240576318">
-                        <td align="left">Random test1</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>1.781</td>
-                                                    <td><span class="badge badge-danger">FAILURE</span></td>
-                                            </tr>
-                                        <tr id="1297548030">
-                        <td align="left">Random test1</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>2.616</td>
-                                                    <td><span class="badge badge-danger">FAILURE</span></td>
-                                            </tr>
-                                        <tr id="1514636745">
-                        <td align="left">Random test1</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>0.556</td>
-                                                    <td><span class="badge badge-success">SUCCESS</span></td>
-                                            </tr>
-                                        <tr id="1861821694">
-                        <td align="left">Random test1</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>2.562</td>
-                                                    <td><span class="badge badge-danger">FAILURE</span></td>
-                                            </tr>
-                                        <tr id="717553758">
-                        <td align="left">Random test1</td>
-                        <td>Sorting and string operation</td>
-                        <td align="left">RandomTest</td>
-                        <td align="left">[]</td>
-                        <td align="left">printRandom</td>
-                        <td>0.366</td>
-                                                    <td><span class="badge badge-success">SUCCESS</span></td>
-                                            </tr>
-                                                        </tbody>
     </table>
 </div>
 </div>
 </body>
-<script>
-    $(document).ready(function () {
-        $('#caseTable').DataTable();
-        $('.table').on('click', ' tbody td .row-details',
-                function () {
-                    var nTr = $(this).parents('tr')[0];
-                    if (oTable.fnIsOpen(nTr)) //判断是否已打开
-                    {
-                        /* This row is already open - close it */
-                        $(this).addClass("row-details-close").removeClass("row-details-open");
-                        oTable.fnClose(nTr);
-                    } else {
-                        /* Open this row */
-                        $(this).addClass("row-details-open").removeClass("row-details-close");
-                        //  alert($(this).attr("data_id"));
-                        //oTable.fnOpen( nTr,
-                        // 调用方法显示详细信息 data_id为自定义属性 存放配置ID
-                        fnFormatDetails(nTr, $(this).attr("data_id"));
-                    }
-                })
-    });
-
-    // function test(ele) {
-    //     let dom = ele
-    //     dom.fadeToggle();
-    // }
-
-    // if(dom.hasClass('dsn')){
-    //     dom.removeClass('dsn')
-    //     dom.addClass('show')
-    // }else{
-    //     dom.removeClass('show')
-    //     dom.addClass('dsn')
-    // }
-    // }
-
-
-</script>
 </html>

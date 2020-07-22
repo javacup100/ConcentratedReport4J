@@ -27,7 +27,7 @@ public class ModelFactory {
             skipped += tModel.getExcludeNumber();
             list.add(tModel);
         }
-        suiteResult.setTotalNumber(passed+failed+skipped);
+        suiteResult.setTotalNumber(passed + failed + skipped);
         Collections.sort(list);
         suiteResult.setTestRunResults(list);
         long start = list.get(0).getStarttime();
@@ -35,7 +35,7 @@ public class ModelFactory {
 
         suiteResult.setStarttime(start);
         suiteResult.setEndtime(end);
-        suiteResult.setDuration((double)(end - start)/1000);
+        suiteResult.setDuration((double) (end - start) / 1000);
 //pass/fail/skipinfo
         suiteResult.setPassedNumber(passed);
         suiteResult.setFailedNumber(failed);
@@ -55,7 +55,7 @@ public class ModelFactory {
         testRun.setStarttime(context.getStartDate().getTime());
         testRun.setEndtime(context.getEndDate().getTime());
         testRun.setDuration(
-                (double)(testRun.getEndtime() - testRun.getEndtime())/1000
+                (double) (testRun.getEndtime() - testRun.getEndtime()) / 1000
         );
         testRun.setExcludedMethods(context.getExcludedMethods());
         testRun.setFailedNumber(context.getFailedTests().size());
@@ -81,15 +81,15 @@ public class ModelFactory {
         Collections.sort(list);
         testRun.setFailedTests(list);
         Collections.sort(all_list);
-        System.out.print("*****the size of cases*****:"+all_list.size());
+        System.out.print("*****the size of cases*****:" + all_list.size());
         testRun.setAllTests(all_list);
         return testRun;
     }
 
     public static TestResult getTestResultModel(ITestResult res) {
         TestResult testResult = new TestResult();
-        List<String> groups=new ArrayList<>();
-        for(String group:res.getMethod().getGroups()){
+        List<String> groups = new ArrayList<>();
+        for (String group : res.getMethod().getGroups()) {
             groups.add(group);
         }
         testResult.setGroups(groups);
@@ -102,12 +102,12 @@ public class ModelFactory {
         testResult.setStarttime(res.getStartMillis());
         testResult.setEndtime(res.getEndMillis());
         testResult.setDuration(
-                (double)(testResult.getEndtime() - testResult.getStarttime())/1000
+                (double) (testResult.getEndtime() - testResult.getStarttime()) / 1000
         );
         testResult.setDependMethod(res.getMethod().getMethodsDependedUpon().toString());
         testResult.setParameters(StringUtils.join(res.getParameters(), ","));
         if (res.getThrowable() != null)
-            testResult.setStackTrace(StringUtils.join(res.getThrowable().getStackTrace()));
+            testResult.setStackTrace(StringUtils.join(res.getThrowable().getStackTrace(),"<br>"));
         return testResult;
     }
 

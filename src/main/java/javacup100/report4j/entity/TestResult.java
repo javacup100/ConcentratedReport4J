@@ -144,11 +144,12 @@ public class TestResult implements Comparable<TestResult> {
 	}
 
 	public String getStackTrace() {
-		return stackTrace;
+		return this.stackTrace==null?" ":this.stackTrace;
 	}
 
 	public void setStackTrace(String stackTrace) {
-		this.stackTrace = stackTrace;
+
+				this.stackTrace = stackTrace;
 	}
 
 	@Override
