@@ -29,6 +29,10 @@
 
         }
 
+        #overall {
+            border-right: solid 1px #ddd;
+        }
+
         .content {
             border-top: solid 1px #ddd;
             background-color: #fff;
@@ -164,7 +168,7 @@
             <p><span>Duration:</span> $allSuites.getDurationString()</p>
         </div>
     </div>
-    <div class="col-md-2 content" id="overall">
+    <div class="col-md-3 content" id="overall">
     </div>
     <script type="text/javascript">
         var myChart = echarts.init(document.getElementById('overall'));
@@ -175,7 +179,7 @@
             },
             legend: {
                 orient: 'horizontal',
-                left: 10,
+                padding: [12, 0, 0, 0],
                 data: ['passed', 'failed', 'skipped'],
                 textStyle: {
                     fontSize: 15
@@ -185,8 +189,8 @@
                 {
                     name: 'Case number',
                     type: 'pie',
-                    radius: '80%',
-                    center: ['50%', '42%'],
+                    radius: '65%',
+                    center: ['50%', '45%'],
                     avoidLabelOverlap: false,
                     label: {
                         show: false,
@@ -227,7 +231,7 @@
         };
         myChart.setOption(option);
     </script>
-    <div class="col-md-6 content" id="suitesChart">
+    <div class="col-md-5 content" id="suitesChart">
     </div>
     <div class="col-md-1">
     </div>
