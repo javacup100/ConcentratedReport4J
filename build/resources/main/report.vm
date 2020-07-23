@@ -185,7 +185,8 @@
                 {
                     name: 'Case number',
                     type: 'pie',
-                    radius: ['80%', '40%'],
+                    radius: '80%',
+                    center: ['50%', '42%'],
                     avoidLabelOverlap: false,
                     label: {
                         show: false,
@@ -193,7 +194,7 @@
                     },
                     emphasis: {
                         label: {
-                            show: true,
+                            show: false,
                             fontSize: '30',
                             fontWeight: 'bold'
                         }
