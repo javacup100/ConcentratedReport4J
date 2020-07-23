@@ -13,7 +13,7 @@
     <style>
         body {
             background: #fdfcf8;
-            font-family: 'Lato','Roboto',Arial,Tahoma,sans-serif;
+            font-family: 'Lato', 'Roboto', Arial, Tahoma, sans-serif;
         }
 
         span {
@@ -23,19 +23,21 @@
         .row {
             margin-top: 20px;
         }
-        #summary{
-            height:400px;
+
+        #summary {
+            height: 400px;
 
         }
 
-        .content{
+        .content {
             border-top: solid 1px #ddd;
             background-color: #fff;
         }
-        .title{
+
+        .title {
             margin-top: 20px;
-            text-align:center;
-            font-size:2em;
+            text-align: center;
+            font-size: 2em;
         }
 
         .table-responsive {
@@ -174,7 +176,10 @@
             legend: {
                 orient: 'horizontal',
                 left: 10,
-                data: ['passed', 'failed', 'skipped']
+                data: ['passed', 'failed', 'skipped'],
+                textStyle: {
+                    fontSize: 15
+                }
             },
             series: [
                 {
@@ -250,18 +255,26 @@
                     saveAsImage: {}
                 }
             },
-            xAxis: {
-                type: 'value',
-                boundaryGap: [0, 0.01]
-            },
             yAxis: {
+                type: 'value',
+                axisLabel: {
+                    textStyle: {
+                        fontSize: 15
+                    }
+                }
+            },
+            xAxis: {
                 type: 'category',
-
                 data: [
                     #foreach ($suite in $suiteList)
                         '$suite.getSuiteName()',
                     #end
-                ]
+                ],
+                axisLabel: {
+                    textStyle: {
+                        fontSize: 15
+                    }
+                }
             },
             series: [
                 {
