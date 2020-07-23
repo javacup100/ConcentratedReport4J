@@ -11,33 +11,26 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <style>
-        p {
-            color: #856404;
-        }
-
         body {
-            background-color: #fff;
-        }
-
-
-        .box {
-            display: flex;
-            flex-wrap: nowrap;
-            margin-top: 1%;
-        }
-
-        .list {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 49.9%;
-            height: 400px;
-            border: solid 1px #ddd;
+            background: #fdfcf8;
         }
 
         span {
             font-weight: bold;
+        }
+
+        .row {
+            margin-top: 20px;
+            border-top: solid 1px #ddd;
+            background-color: #fff;
+        }
+        #summary{
+            height:400px;
+
+        }
+
+        .table-responsive {
+            overflow-x: hidden !important;
         }
 
         td.details-control {
@@ -142,12 +135,16 @@
         });
     </script>
 </head>
-<body class="">
-
-<div class="box">
-    <div class="list" style="border-left: none">
+<body>
+<div style="align-items:center">
+    <h2>Test report for product</h2>
+</div>
+<div class="row" id="summary">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-2">
         <h3>Summary</h3>
-        <div class="list">
+        <div>
             <p><span>Date:</span> $allSuites.getDate()</p>
             <p><span>Total cases:</span>$allSuites.getTotalNumber()</p>
             <p><span>Passed:</span> $allSuites.getPassedNumber()</p>
@@ -155,55 +152,72 @@
             <p><span>Skipped:</span> $allSuites.getSkippedNumber()</p>
             <p><span>Duration:</span> $allSuites.getDurationString()</p>
         </div>
-        <div id="overall" class="list"></div>
-        <script type="text/javascript">
-            var myChart = echarts.init(document.getElementById('overall'));
-            var option = {
-                tooltip: {
-                    trigger: 'item',
-                    formatter: '{a} <br/>{b}: {c} ({d}%)'
-                },
-                legend: {
-                    orient: 'horizontal',
-                    left: 10,
-                    data: ['passed', 'failed', 'skipped']
-                },
-                series: [
-                    {
-                        name: 'Case number',
-                        type: 'pie',
-                        radius: ['50%', '70%'],
-                        avoidLabelOverlap: false,
-                        label: {
-                            show: false,
-                            position: 'center'
-                        },
-                        emphasis: {
-                            label: {
-                                show: true,
-                                fontSize: '30',
-                                fontWeight: 'bold'
-                            }
-                        },
-                        labelLine: {
-                            show: false
-                        },
-                        data: [
-                            {value: $allSuites.getPassedNumber(), name: 'passed'},
-                            {value: $allSuites.getFailedNumber(), name: 'failed'},
-                            {value: $allSuites.getSkippedNumber(), name: 'skipped'}
-                        ]
-                    }
-                ]
-            };
-            myChart.setOption(option);
-        </script>
-
     </div>
-    <div class="list" id="sumPie">
+    <div class="col-md-2" id="overall">
     </div>
     <script type="text/javascript">
-        var myChart = echarts.init(document.getElementById('sumPie'));
+        var myChart = echarts.init(document.getElementById('overall'));
+        var option = {
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b}: {c} ({d}%)'
+            },
+            legend: {
+                orient: 'horizontal',
+                left: 10,
+                data: ['passed', 'failed', 'skipped']
+            },
+            series: [
+                {
+                    name: 'Case number',
+                    type: 'pie',
+                    radius: ['80%', '40%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        show: false,
+                        position: 'center'
+                    },
+                    emphasis: {
+                        label: {
+                            show: true,
+                            fontSize: '30',
+                            fontWeight: 'bold'
+                        }
+                    },
+                    labelLine: {
+                        show: false
+                    },
+                    data: [
+                        {
+                            value: $allSuites.getPassedNumber(), name: 'passed', itemStyle: {
+                                // 设置扇形的颜色
+                                color: 'green'
+                            }
+                        },
+                        {
+                            value: $allSuites.getFailedNumber(), name: 'failed', itemStyle: {
+                                // 设置扇形的颜色
+                                color: '#B22222'
+                            }
+                        },
+                        {
+                            value: $allSuites.getSkippedNumber(), name: 'skipped', itemStyle: {
+                                // 设置扇形的颜色
+                                color: 'gray'
+                            }
+                        }
+                    ]
+                }
+            ]
+        };
+        myChart.setOption(option);
+    </script>
+    <div class="col-md-6" id="suitesChart">
+    </div>
+    <div class="col-md-1">
+    </div>
+    <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('suitesChart'));
         var option = {
             title: {
                 text: 'Statistics by suite',
@@ -248,7 +262,12 @@
                         #foreach ($suite in $suiteList)
                                 $suite.getPassedNumber(),
                         #end
-                    ]
+                    ],
+                    barWidth: 25,
+                    itemStyle: {
+                        // 设置扇形的颜色
+                        color: 'green'
+                    }
                 },
                 {
                     name: 'fail',
@@ -257,7 +276,12 @@
                         #foreach ($suite in $suiteList)
                                 $suite.getFailedNumber(),
                         #end
-                    ]
+                    ],
+                    barWidth: 25,
+                    itemStyle: {
+                        // 设置扇形的颜色
+                        color: '#B22222'
+                    }
                 },
                 {
                     name: 'skipp',
@@ -266,32 +290,41 @@
                         #foreach ($suite in $suiteList)
                                 $suite.getSkippedNumber(),
                         #end
-                    ]
+                    ], barWidth: 25,
+                    itemStyle: {
+                        // 设置扇形的颜色
+                        color: 'gray'
+                    }
                 }
             ]
         };
         myChart.setOption(option);
     </script>
 </div>
-
-
-<div class="table-responsive" style="width: 90%">
-    <h3>Executed cases</h3>
-    <table class="display" id="caseTable">
-        <thead>
-        <tr>
-            <th></th>
-            <th>Suite</th>
-            <th>TestRun</th>
-            <th>Class</th>
-            <th>Groups</th>
-            <th>CaseName</th>
-            <th width="10%">Duration</th>
-            <th class="filter">Status</th>
-        </tr>
-        </thead>
-    </table>
-</div>
+<div class="row">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-10">
+        <div class="table-responsive">
+            <h3>Executed cases</h3>
+            <table class="display" id="caseTable">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Suite</th>
+                    <th>TestRun</th>
+                    <th>Class</th>
+                    <th>Groups</th>
+                    <th>CaseName</th>
+                    <th>Duration</th>
+                    <th class="filter">Status</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-1">
+    </div>
 </div>
 </body>
 </html>

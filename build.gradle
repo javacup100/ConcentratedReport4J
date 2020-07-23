@@ -32,7 +32,7 @@ dependencies {
 test{
     useTestNG(){
         useDefaultListeners = false
-        suites(file('src/test/resources/testng.xml'),file('src/test/resources/testng2.xml'))
+        suites(file('src/test/resources/testng.xml'),file('src/test/resources/testng2.xml'),file('src/test/resources/testng3.xml'))
         reports.html.enabled = false
 
     }

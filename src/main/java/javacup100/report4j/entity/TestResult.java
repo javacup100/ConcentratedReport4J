@@ -25,8 +25,16 @@ public class TestResult implements Comparable<TestResult> {
 		this.durationString = durationString;
 	}
 
-	public List<String> getGroups() {
-		return groups;
+	public String getGroups() {
+		StringBuffer stringBuffer=new StringBuffer();
+		if(this.groups.size()>0){
+			for(String group:this.groups){
+				stringBuffer.append(groups);
+				stringBuffer.append(",");
+			}
+			stringBuffer.deleteCharAt(stringBuffer.length()-1);
+		}
+		return stringBuffer.toString();
 	}
 
 	public void setGroups(List<String> groups) {
