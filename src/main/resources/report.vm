@@ -13,6 +13,7 @@
     <style>
         body {
             background: #fdfcf8;
+            font-family: 'Lato','Roboto',Arial,Tahoma,sans-serif;
         }
 
         span {
@@ -21,12 +22,20 @@
 
         .row {
             margin-top: 20px;
-            border-top: solid 1px #ddd;
-            background-color: #fff;
         }
         #summary{
             height:400px;
 
+        }
+
+        .content{
+            border-top: solid 1px #ddd;
+            background-color: #fff;
+        }
+        .title{
+            margin-top: 20px;
+            text-align:center;
+            font-size:2em;
         }
 
         .table-responsive {
@@ -136,15 +145,15 @@
     </script>
 </head>
 <body>
-<div style="align-items:center">
-    <h2>Test report for product</h2>
+<div class="title">
+    <span>Test report for product</span>
 </div>
 <div class="row" id="summary">
     <div class="col-md-1">
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2 content">
         <h3>Summary</h3>
-        <div>
+        <div style="font-size:1.25em;margin-top:30px">
             <p><span>Date:</span> $allSuites.getDate()</p>
             <p><span>Total cases:</span>$allSuites.getTotalNumber()</p>
             <p><span>Passed:</span> $allSuites.getPassedNumber()</p>
@@ -153,7 +162,7 @@
             <p><span>Duration:</span> $allSuites.getDurationString()</p>
         </div>
     </div>
-    <div class="col-md-2" id="overall">
+    <div class="col-md-2 content" id="overall">
     </div>
     <script type="text/javascript">
         var myChart = echarts.init(document.getElementById('overall'));
@@ -212,7 +221,7 @@
         };
         myChart.setOption(option);
     </script>
-    <div class="col-md-6" id="suitesChart">
+    <div class="col-md-6 content" id="suitesChart">
     </div>
     <div class="col-md-1">
     </div>
@@ -304,7 +313,7 @@
 <div class="row">
     <div class="col-md-1">
     </div>
-    <div class="col-md-10">
+    <div class="col-md-10 content">
         <div class="table-responsive">
             <h3>Executed cases</h3>
             <table class="display" id="caseTable">
