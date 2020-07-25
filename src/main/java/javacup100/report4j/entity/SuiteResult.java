@@ -21,6 +21,24 @@ public class SuiteResult {
 	private long endtime;
 	private String description;
 	private List<String> output;
+	private boolean isParallel;
+	private int threadCount;
+
+	public boolean isParallel() {
+		return isParallel;
+	}
+
+	public void setParallel(boolean parallel) {
+		isParallel = parallel;
+	}
+
+	public int getThreadCount() {
+		return threadCount;
+	}
+
+	public void setThreadCount(int threadCount) {
+		this.threadCount = threadCount;
+	}
 
 	public List<TestRunResult> getTestRunResults() {
 		return testRunResults;

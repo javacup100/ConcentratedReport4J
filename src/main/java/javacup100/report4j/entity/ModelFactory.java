@@ -16,6 +16,8 @@ public class ModelFactory {
         SuiteResult suiteResult = new SuiteResult();
 //overallinfo
         suiteResult.setSuiteName(suite.getName());
+        suiteResult.setParallel(Boolean.valueOf(suite.getXmlSuite().getParallel().isParallel()));
+        suiteResult.setThreadCount(suite.getXmlSuite().getThreadCount());
         Map<String, ISuiteResult> results = suite.getResults();
         List<TestRunResult> list = new ArrayList<>();
         int passed = 0, failed = 0, skipped = 0;
@@ -107,7 +109,7 @@ public class ModelFactory {
         testResult.setDependMethod(res.getMethod().getMethodsDependedUpon().toString());
         testResult.setParameters(StringUtils.join(res.getParameters(), ","));
         if (res.getThrowable() != null)
-            testResult.setStackTrace(StringUtils.join(res.getThrowable().getStackTrace(),"<br>"));
+            testResult.setStackTrace(StringUtils.join(res.getThrowable().getStackTrace(), "<br>"));
         return testResult;
     }
 
