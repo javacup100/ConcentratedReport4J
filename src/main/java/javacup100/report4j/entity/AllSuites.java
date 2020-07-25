@@ -10,6 +10,15 @@ public class AllSuites {
     private Double duration;
     private String durationString;
     private String date;
+    private int threadCounts;
+
+    public int getThreadCounts() {
+        return threadCounts;
+    }
+
+    public void setThreadCounts(int threadCounts) {
+        this.threadCounts = threadCounts;
+    }
 
     public String getDate() {
         return date;

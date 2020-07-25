@@ -33,7 +33,7 @@ public class SuiteResult {
 	}
 
 	public int getThreadCount() {
-		return threadCount;
+		return isParallel?this.threadCount:1;
 	}
 
 	public void setThreadCount(int threadCount) {

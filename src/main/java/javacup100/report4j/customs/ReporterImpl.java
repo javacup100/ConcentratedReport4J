@@ -37,7 +37,7 @@ public class ReporterImpl implements IReporter {
 		VelocityContext velocityContext = new VelocityContext();
 		AllSuites allSuites=new AllSuites();
 		allSuites.setDate(dateUtil.toDateString(System.currentTimeMillis()));
-		int totalNumber=0,passed=0,failed=0,skipped=0;
+		int totalNumber=0,passed=0,failed=0,skipped=0,threadCounts=0;
 		double duration=0.0;
 		for (ISuite suite : suites) {
 			SuiteResult sModel = ModelFactory.getSuiteResult(suite);
@@ -46,6 +46,7 @@ public class ReporterImpl implements IReporter {
 			failed+=sModel.getFailedNumber();
 			skipped+=sModel.getSkippedNumber();
 			duration+=sModel.getDuration();
+			threadCounts+=sModel.getThreadCount();
 			suiteList.add(sModel);
 		}
 		allSuites.setTotalNumber(totalNumber);
@@ -53,6 +54,7 @@ public class ReporterImpl implements IReporter {
 		allSuites.setFailedNumber(failed);
 		allSuites.setSkippedNumber(skipped);
 		allSuites.setDuration(duration);
+		allSuites.setThreadCounts(threadCounts);
 		allSuites.setDurationString();
 		velocityContext.put("suiteList", suiteList);
 		velocityContext.put("allSuites", allSuites);

@@ -165,6 +165,7 @@
             <p><span>Passed:</span> $allSuites.getPassedNumber()</p>
             <p><span>Failed:</span> $allSuites.getFailedNumber()</p>
             <p><span>Skipped:</span> $allSuites.getSkippedNumber()</p>
+            <p><span>Thread counts:</span> $allSuites.getThreadCounts()</p>
             <p><span>Duration:</span> $allSuites.getDurationString()</p>
         </div>
     </div>
